@@ -10,6 +10,7 @@ import { Base64 } from './libraries/Base64.sol';
 contract MyEpicNFT is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
+    uint8 totalNFT;
 
     string baseSvg = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: #01B4C6; font-family: sans-serif; font-size: 24px; font-weight:700;}</style><rect width='100%' height='100%' fill='#BEE5FD' /><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
 
@@ -26,6 +27,7 @@ contract MyEpicNFT is ERC721URIStorage {
 
     constructor() ERC721 ("Rick & Morty NFT", "RICKMORTY") {
         console.log("NFT FTW!");
+        totalNFT = 50;
     }
 
     function random (string memory input) internal pure returns (uint256) {
@@ -50,8 +52,15 @@ contract MyEpicNFT is ERC721URIStorage {
         return thirdWords[rand];
     }
 
+    function getTotalNFTsMintedSoFar() public view returns (uint256) {
+        console.log(_tokenIds.current());
+        return _tokenIds.current()+1;
+    }
+
     function makeAnEpicNFT() public {
         uint256 newItemId = _tokenIds.current();
+
+        require(newItemId < totalNFT);
 
         string memory first = pickRandomFirstWord(newItemId);
         string memory second = pickRandomSecondWord(newItemId);
