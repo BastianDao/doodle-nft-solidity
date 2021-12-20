@@ -1,4 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-etherscan");
+
 require('dotenv').config();
 
 /**
@@ -16,5 +18,9 @@ module.exports = {
       url: process.env.PROD_ALCHEMY_KEY,
       accounts: [process.env.PRIVATE_KEY]
     }
+  ,
+  },
+  etherscan: {
+    apiKey: "EGFB9G4VANZTQA81MF3HJIUC8CBNDQZ1N2"
   }
 };
