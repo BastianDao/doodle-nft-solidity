@@ -11,6 +11,8 @@ const main = async () => {
 
     totalNftsMinted = await nftContract.getTotalNFTsMintedSoFar();
     console.log(totalNftsMinted.toNumber());
+
+    console.log('https://rinkeby.rarible.com/token/', nftContract.address, ':0');
 }
 
 const runMain = async () => {
