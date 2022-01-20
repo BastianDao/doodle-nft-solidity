@@ -14,6 +14,14 @@ contract MyEpicNFT is ERC721URIStorage {
 
     event NewEpicNFTMinted(address sender, uint256 tokenId);
 
+    struct MetaData {
+        uint256 timestamp;
+        uint256 tokenID;
+        string tokenURI;
+    }
+
+    mapping(address => MetaData[]) public userNFTs;
+
     constructor() ERC721 ("Doodle NFT", "DOODLE") {
         console.log("NFT FTW!");
         totalNFT = 50;
@@ -57,11 +65,18 @@ contract MyEpicNFT is ERC721URIStorage {
         );
         console.log("--------------------\n");
 
+        MetaData memory tokenMetaData = MetaData(block.timestamp, newItemId, finalTokenUri);
+        userNFTs[_to].push(tokenMetaData);
+
         _safeMint(msg.sender, newItemId);
         _setTokenURI(newItemId, finalTokenUri);
         console.log("%s minted by %s", newItemId, msg.sender);
         _tokenIds.increment();
 
         emit NewEpicNFTMinted(msg.sender, newItemId);
+    }
+
+    function NFTsMetaDataByOwner(address _nftOwner) external view returns(MetaData[] memory) {
+        return userNFTs[_nftOwner];
     }
 }
