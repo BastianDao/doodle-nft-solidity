@@ -17,7 +17,6 @@ contract MyEpicNFT is ERC721URIStorage {
     struct MetaData {
         uint256 timestamp;
         uint256 tokenID;
-        string tokenURI;
     }
 
     mapping(address => MetaData[]) public userNFTs;
@@ -65,7 +64,7 @@ contract MyEpicNFT is ERC721URIStorage {
         );
         console.log("--------------------\n");
 
-        MetaData memory tokenMetaData = MetaData(block.timestamp, newItemId, finalTokenUri);
+        MetaData memory tokenMetaData = MetaData(block.timestamp, newItemId);
         userNFTs[msg.sender].push(tokenMetaData);
 
         _safeMint(msg.sender, newItemId);
