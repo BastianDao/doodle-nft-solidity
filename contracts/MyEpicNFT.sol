@@ -17,7 +17,7 @@ contract MyEpicNFT is ERC721URIStorage {
     struct MetaData {
         uint256 timestamp;
         uint256 tokenID;
-        string tokenURI;
+        string imageData;
     }
 
     mapping(address => MetaData[]) public userNFTs;
