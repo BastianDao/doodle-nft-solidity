@@ -65,7 +65,7 @@ contract MyEpicNFT is ERC721URIStorage {
         );
         console.log("--------------------\n");
 
-        MetaData memory tokenMetaData = MetaData(block.timestamp, newItemId, finalTokenUri);
+        MetaData memory tokenMetaData = MetaData(block.timestamp, newItemId, doodle);
         userNFTs[msg.sender].push(tokenMetaData);
         _safeMint(msg.sender, newItemId);
         _setTokenURI(newItemId, finalTokenUri);
